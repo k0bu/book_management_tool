@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Book implements IBook{
+public class Book implements Element{
   /*Example of the parametres
   private String _title;
   private String _isbn;
@@ -59,6 +59,6 @@ public class Book implements IBook{
     return this._detail.equals(b.getBookDetail());
   }
 
-  
+
 
 }
