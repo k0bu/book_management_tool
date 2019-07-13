@@ -55,6 +55,10 @@ public class Book implements Element{
     return this._detail.containsKey(key);
   }
 
+  public boolean equalsParamaetre(String value){
+    return this._detail.containsValue(value);
+  }
+
   public boolean equals(Book b){
     return this._detail.equals(b.getBookDetail());
   }
