@@ -7,7 +7,7 @@ public class Test{
     for(int i = 0; i < 10; i++){
       var book = new Book();
       book.addParametre( String.valueOf(i), "value" + i);
-      books.addBook(book);
+      books.addElement(book);
     }
 
     books.getBookShelf().forEach(b->{
@@ -18,6 +18,17 @@ public class Test{
 
     List<Book> arrangedBooks = Recommend.interest(books.getBookShelf());
     System.out.println();
+    System.out.println("INTEREST:");
+
+    arrangedBooks.forEach(b->{
+      b.getBookDetail().forEach((k,v)->{
+        System.out.println(k + ": " + v);
+      });
+    });
+
+    arrangedBooks = Recommend.popularity(books.getBookShelf());
+    System.out.println();
+    System.out.println("POPULARITY:");
 
     arrangedBooks.forEach(b->{
       b.getBookDetail().forEach((k,v)->{

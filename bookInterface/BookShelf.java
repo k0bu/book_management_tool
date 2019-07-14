@@ -1,6 +1,7 @@
 package bookInterface;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BookShelf implements Aggregation {
   private List<Book> _bookShelf;
@@ -13,17 +14,22 @@ public class BookShelf implements Aggregation {
     this._bookShelf = books;
   }
 
-  public void setBookShelf(List<Book> books){
-    this._bookShelf = books;
+  public void setAggregation(List<Element> books){
+    if(!(books.get(0).getClass().isAssignableFrom(Book.class))){
+      return;
+    }
+    this._bookShelf = books.stream().map(
+      e -> (Book)e
+      ).collect(Collectors.toList());
   }
 
-  public void addBook(Book b){
-    this._bookShelf.add(b);
-  }
+  // public void addBook(Book b){
+  //   this._bookShelf.add(b);
+  // }
 
   public void addBooks(List<Book> books){
     books.forEach(b->{
-      this.addBook(b);
+      this.addElement(b);
     });
   }
 
@@ -32,7 +38,7 @@ public class BookShelf implements Aggregation {
   }
 
   @Override
-  public void setElement(Element e) {
+  public void addElement(Element e) {
     if(!(e instanceof Book) ) return;
     Book b = (Book) e;
     this._bookShelf.add(b);
@@ -50,6 +56,11 @@ public class BookShelf implements Aggregation {
     if(!(e instanceof Book) ) return false;
     Book b = (Book) e;
     return this._bookShelf.contains(b);
+  }
+
+  @Override
+  public void removeAggregation(){
+    this._bookShelf.clear();
   }
 
   public List<Book> filterBooks(String value){
