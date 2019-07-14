@@ -1,3 +1,5 @@
+package bookInterface;
+
 public interface Aggregation{
   public void setElement(Element e);
   public void removeElement(Element e);
