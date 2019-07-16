@@ -10,10 +10,12 @@ public class Test{
       books.addElement(book);
     }
 
-    books.toStrings().forEach(s->{
-      System.out.print(s);
-    });
-    
+    System.out.print(books.toString());
+
+    // books.toStrings().forEach(s->{
+    //   System.out.print(s);
+    // });
+
     // books.getBooks().forEach(b->{
     //   b.getBookDetail().forEach((k,v)->{
     //     System.out.println(k + ": " + v);
