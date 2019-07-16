@@ -76,4 +76,13 @@ public class BookShelf implements Aggregation {
     return strings;
   }
 
+  public String toString(){
+    ArrayList<String> strings = toStrings();
+    StringBuilder builder = new StringBuilder();
+    strings.forEach(s->{
+      builder.append(s);
+    });
+    return builder.toString();
+  }
+
 }
