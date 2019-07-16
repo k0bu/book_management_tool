@@ -6,17 +6,30 @@ public class Test{
     BookShelf books = new BookShelf();
     for(int i = 0; i < 10; i++){
       var book = new Book();
-      book.addParametre( String.valueOf(i), "value" + i);
+      book.addParametre( "title", "value " + i);
       books.addElement(book);
     }
 
-    books.getBookShelf().forEach(b->{
+    books.getBooks().forEach(b->{
+      b.getBookDetail().forEach((k,v)->{
+        System.out.println(k + ": " + v);
+      });
+    });
+   
+    System.out.println();
+    System.out.println("REMOVED 3:");
+
+    books.filterBooks("title", "value 3").forEach(b->{
+      books.removeElement(b);
+    });
+
+    books.getBooks().forEach(b->{
       b.getBookDetail().forEach((k,v)->{
         System.out.println(k + ": " + v);
       });
     });
 
-    List<Book> arrangedBooks = Recommend.interest(books.getBookShelf());
+    List<Book> arrangedBooks = Recommend.interest(books.getBooks());
     System.out.println();
     System.out.println("INTEREST:");
 
@@ -26,7 +39,7 @@ public class Test{
       });
     });
 
-    arrangedBooks = Recommend.popularity(books.getBookShelf());
+    arrangedBooks = Recommend.popularity(books.getBooks());
     System.out.println();
     System.out.println("POPULARITY:");
 
