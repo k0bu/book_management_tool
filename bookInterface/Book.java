@@ -68,4 +68,12 @@ public class Book implements Element {
     return this._detail.equals(b.getBookDetail());
   }
 
+  public String toString(){
+    StringBuilder builder = new StringBuilder();
+    this._detail.forEach( (k,v)->{
+      builder.append(k + ": " + v + "\n");
+    });
+    return builder.toString();
+  }
+
 }

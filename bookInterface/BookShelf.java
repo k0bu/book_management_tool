@@ -22,16 +22,6 @@ public class BookShelf implements Aggregation {
     this._bookShelf = books.stream().map(e -> (Book) e).collect(Collectors.toList());
   }
 
-  // public void addBook(Book b){
-  // this._bookShelf.add(b);
-  // }
-
-  // public void addBooks(List<Book> books){
-  // books.forEach(b->{
-  // this.addElement(b);
-  // });
-  // }
-
   @Override
   public void addElement(Element e) {
     if (!(e instanceof Book)) {
@@ -76,6 +66,14 @@ public class BookShelf implements Aggregation {
       }
     });
     return filteredBooks;
+  }
+
+  public ArrayList<String> toStrings(){
+    ArrayList<String> strings = new ArrayList<>();
+    this._bookShelf.forEach(b->{
+      strings.add(b.toString());
+    });
+    return strings;
   }
 
 }

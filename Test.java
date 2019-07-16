@@ -10,12 +10,16 @@ public class Test{
       books.addElement(book);
     }
 
-    books.getBooks().forEach(b->{
-      b.getBookDetail().forEach((k,v)->{
-        System.out.println(k + ": " + v);
-      });
+    books.toStrings().forEach(s->{
+      System.out.print(s);
     });
-   
+    
+    // books.getBooks().forEach(b->{
+    //   b.getBookDetail().forEach((k,v)->{
+    //     System.out.println(k + ": " + v);
+    //   });
+    // });
+    
     System.out.println();
     System.out.println("REMOVED 3:");
 
