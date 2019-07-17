@@ -1,21 +1,26 @@
 import buttonsUtil.*;
+import bookInterface.*;
 
-import javax.swing.*; 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GUITest {
 
 	private DefaultListModel<String> _listModel;
 	private JList<String> _list;
-	private List<JTextField> _fieldList = new ArrayList<>();
+	private Map<JTextField, JTextField> _fieldMap = new HashMap<>();
+	private BookShelf _bookShelf = new BookShelf();
 
 
 	public Component createComponents() {
-		JTextField field = new JTextField("initial text");
-		this._fieldList.add(field);
+		JTextField keyField = new JTextField("Title");
+		JTextField valueField = new JTextField("0");
+		this._fieldMap.put(keyField, valueField);
 
 		_listModel = new DefaultListModel<String>();
 
@@ -28,14 +33,14 @@ public class GUITest {
 
 	
 		JButton regButton = new JButton("Register");
-		RegisterButtonAction regButtonListener = new RegisterButtonAction(_list, _fieldList);
+		RegisterBookButtonAction regButtonListener = new RegisterBookButtonAction(_list, _fieldMap, _bookShelf);
 		regButton.addActionListener( regButtonListener );
 
 		regButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
 		JButton delButton = new JButton("Delete");
-		DeleteButtonAction<String> delButtonListener = new DeleteButtonAction<>(_list);
+		DeleteBookButtonAction delButtonListener = new DeleteBookButtonAction(this._list, this._bookShelf);
 		delButton.addActionListener( delButtonListener );
 
 		JButton quitButton = new JButton("Quit");
@@ -51,8 +56,13 @@ public class GUITest {
 		JPanel mainPane = new JPanel();
 		mainPane.setBorder(BorderFactory.createEmptyBorder( 320, 320, 320, 320 ));
 		mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.Y_AXIS));
-		this._fieldList.forEach(f->{
-			mainPane.add(f);
+		this._fieldMap.forEach((k,v)->{
+			JPanel fieldPane = new JPanel();
+			fieldPane.setLayout(new BoxLayout(fieldPane, BoxLayout.X_AXIS));
+			fieldPane.add(k);
+			fieldPane.add(Box.createRigidArea(new Dimension(10,20)));
+			fieldPane.add(v);
+			mainPane.add(fieldPane);
 		});
 
 		mainPane.add(Box.createRigidArea(new Dimension(10, 20)));
