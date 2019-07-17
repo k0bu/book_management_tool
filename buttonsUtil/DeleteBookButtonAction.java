@@ -10,44 +10,43 @@ import bookInterface.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
+public class DeleteBookButtonAction implements ActionListener {
+  private Map<String, JList<String>> _listMap;
+  private Map<String, BookShelf> _aggMap;
 
-public class DeleteBookButtonAction  implements ActionListener {
-  private JList<String> _list;
-  private BookShelf _agg; //aggregation
-  
-  public DeleteBookButtonAction(JList<String> list, BookShelf agg){
-    this._list = list;
-    this._agg = agg;
+  public DeleteBookButtonAction(Map<String, JList<String>> listMap,  Map<String, BookShelf> aggMap) {
+    this._listMap = listMap;
+    this._aggMap = aggMap;
   }
 
   public void actionPerformed(ActionEvent e) {
-    DefaultListModel<String> listModel = (DefaultListModel<String>)this._list.getModel();
-    int[] selectedIndicies = _list.getSelectedIndices();
-    List<String> selected = new ArrayList<>();
-    List<String> unselected = new ArrayList<>();
-    if(selectedIndicies.length > 0){
+    this._listMap.forEach((string,list) -> {
+      DefaultListModel<String> listModel = (DefaultListModel<String>) list.getModel();
+      List<String> selected = new ArrayList<>();
+      List<String> unselected = new ArrayList<>();
       for (int i = 0; i < listModel.getSize(); i++) {
-        if (!_list.isSelectedIndex(i)) {
+        if (!list.isSelectedIndex(i)) {
           unselected.add(listModel.getElementAt(i));
         } else {
           selected.add(listModel.getElementAt(i));
         }
       }
 
-      selected.forEach(s->{
+      selected.forEach(s -> {
         Book b = new Book(s);
-        this._agg.removeElement(b);
+        this._aggMap.get(string).removeElement(b);
       });
 
-      System.out.println(this._agg.toString());
+      System.out.println(string);
+      System.out.println(this._aggMap.get(string).toString());
 
       listModel.clear();
       listModel = new ListModelUtil<String>().List2ListModel(unselected);
-      this._list.setModel(listModel);
-    } else {
-      JOptionPane.showMessageDialog(this._list, "None selected!", "Error", JOptionPane.ERROR_MESSAGE);
-    }
+      list.setModel(listModel);
+
+    });
 
   }
 }
