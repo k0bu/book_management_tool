@@ -68,12 +68,26 @@ public class Book implements Element {
     return this._detail.equals(b.getBookDetail());
   }
 
-  public String toString(){
+  public String toString() {
     StringBuilder builder = new StringBuilder();
-    this._detail.forEach( (k,v)->{
-      builder.append(k + ": " + v + "\n");
+    this._detail.forEach((k, v) -> {
+      builder.append(k + ":" + v + "\n");
     });
     return builder.toString();
+  }
+
+  public void setString2Book(String inputBookString) {
+    inputBookString.replaceAll("\r\n", "\n");
+    String[] str = inputBookString.split("\n");
+    Map<String, String> bookDetail = new LinkedHashMap<>();
+    for(var s: str){
+      String[] keyValue = s.split(":");
+      if(keyValue.length == 2){
+        bookDetail.put(keyValue[0],keyValue[1]);
+      }
+    }
+
+    this._detail = bookDetail;
   }
 
 }

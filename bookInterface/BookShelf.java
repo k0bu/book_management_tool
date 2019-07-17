@@ -85,4 +85,18 @@ public class BookShelf implements Aggregation {
     return builder.toString();
   }
 
+  public void setStrings2Books(ArrayList<String> inputBooksStrings){
+    inputBooksStrings.forEach(s->{
+      s.replaceAll("\r\n", "\n");
+    });
+    List<Book> books = new ArrayList<>();
+    inputBooksStrings.forEach(s->{
+      Book b = new Book();
+      b.setString2Book(s);
+      books.add(b);
+    });
+
+    this._bookShelf = books;
+  }
+
 }
