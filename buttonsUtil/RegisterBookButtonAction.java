@@ -17,6 +17,9 @@ public class RegisterBookButtonAction implements ActionListener {
   private JList<String> _list;
   private BookShelf _agg; //aggregation
 
+  //Maybe there is necessity in implementing List for JTextfield for each parametres, 
+  //to have them each separated. 
+
   public RegisterBookButtonAction(JList<String> list, Map<JTextField, JTextField> textFieldMap, BookShelf agg) {
     this._list = list;
     this._textFieldMap = (HashMap<JTextField, JTextField>) textFieldMap;
@@ -35,6 +38,9 @@ public class RegisterBookButtonAction implements ActionListener {
 
     this._agg.addElement(b);
     listModel.addElement(b.toString());
+
+    System.out.println("REGISTERED TO toReadList:");
+    System.out.println(this._agg.toString());
     //Below code is unnecessary.
     //this._list.setModel(listModel);
   }
