@@ -37,7 +37,11 @@ public class BookShelf implements Aggregation {
       return;
     }
     Book b = (Book) e;
-    this._bookShelf.remove(b);
+    //This does not work since its not the same object.
+    //this._bookShelf.remove(b);
+    this._bookShelf.removeIf(book->{
+      return book.equals(b);
+    });
   }
 
   @Override

@@ -7,6 +7,7 @@ public class Book implements Element {
    * Example of the parametres private String _title; private String _isbn;
    * private Stirng _author; private String _publisher; private String _year;
    */
+  //Map can be compared as same if it shares the same key and value
   private Map<String, String> _detail;
 
   public Book() {
@@ -15,6 +16,11 @@ public class Book implements Element {
 
   public Book(Map<String, String> initial) {
     this._detail = initial;
+  }
+
+  public Book(String s){
+    this._detail = new LinkedHashMap<>();
+    setString2Book(s);
   }
 
   public boolean addParametre(String key, String value) {
