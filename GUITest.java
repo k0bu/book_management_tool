@@ -3,35 +3,39 @@ import buttonsUtil.*;
 import javax.swing.*; 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class GUITest {
-	private JTextField field;
-	private DefaultListModel<String> listModel;
-	private JList<String> list;
+
+	private DefaultListModel<String> _listModel;
+	private JList<String> _list;
+	private List<JTextField> _fieldList = new ArrayList<>();
 
 
 	public Component createComponents() {
-		field = new JTextField("initial text");
+		JTextField field = new JTextField("initial text");
+		this._fieldList.add(field);
 
-		listModel = new DefaultListModel<String>();
+		_listModel = new DefaultListModel<String>();
 
-		list = new JList<String>(listModel);
-		list.setVisibleRowCount(10);
-		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		JScrollPane scrollPane = new JScrollPane(list);
+		_list = new JList<String>(_listModel);
+		_list.setVisibleRowCount(10);
+		_list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		JScrollPane scrollPane = new JScrollPane(_list);
 		scrollPane.createVerticalScrollBar();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 	
 		JButton regButton = new JButton("Register");
-		RegisterButtonAction regButtonListener = new RegisterButtonAction(list, field);
+		RegisterButtonAction regButtonListener = new RegisterButtonAction(_list, _fieldList);
 		regButton.addActionListener( regButtonListener );
 
 		regButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
 		JButton delButton = new JButton("Delete");
-		DeleteButtonAction<String> delButtonListener = new DeleteButtonAction<>(list);
+		DeleteButtonAction<String> delButtonListener = new DeleteButtonAction<>(_list);
 		delButton.addActionListener( delButtonListener );
 
 		JButton quitButton = new JButton("Quit");
@@ -47,7 +51,9 @@ public class GUITest {
 		JPanel mainPane = new JPanel();
 		mainPane.setBorder(BorderFactory.createEmptyBorder( 320, 320, 320, 320 ));
 		mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.Y_AXIS));
-		mainPane.add(field);
+		this._fieldList.forEach(f->{
+			mainPane.add(f);
+		});
 
 		mainPane.add(Box.createRigidArea(new Dimension(10, 20)));
 		mainPane.add(regButton);
