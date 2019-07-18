@@ -19,6 +19,9 @@ public class GUITest {
 	private BookShelf _finishedBookShelf = new BookShelf();
 
 	public Component createComponents() {
+		
+		JPanel mainPane = new JPanel();
+
 		for(int i = 0; i< 3; i++){
 			JTextField keyField = new JTextField("Title");
 			JTextField valueField = new JTextField("0");
@@ -55,6 +58,7 @@ public class GUITest {
 		regButton.addActionListener( regButtonListener );
 		regButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+	
 		JButton toRead2Finished = new JButton(">");
 		MoveElementButtonAction toRead2FinishedListener = new MoveElementButtonAction(_toReadList, _finishedList, _toReadBookShelf, _finishedBookShelf);
 		toRead2Finished.addActionListener(toRead2FinishedListener);
@@ -64,7 +68,6 @@ public class GUITest {
 		MoveElementButtonAction finished2ToReadListener = new MoveElementButtonAction(_finishedList, _toReadList, _finishedBookShelf, _toReadBookShelf);
 		finished2ToRead.addActionListener(finished2ToReadListener);
 		finished2ToRead.setAlignmentX(Component.CENTER_ALIGNMENT);
-
 
 		JButton delButton = new JButton("Delete");
 		DeleteBookButtonAction delButtonListener = new DeleteBookButtonAction(_listMap, _bookShelfMap);
@@ -80,18 +83,27 @@ public class GUITest {
 		subPane1.add(Box.createRigidArea(new Dimension(30, 10)));
 		subPane1.add(quitButton);
 
-		JPanel mainPane = new JPanel();
+		
 		mainPane.setBorder(BorderFactory.createEmptyBorder( 320, 320, 320, 320 ));
 		mainPane.setLayout(new BoxLayout(mainPane, BoxLayout.Y_AXIS));
-		
+
+		JPanel fieldPaneY = new JPanel();
+		fieldPaneY.setLayout(new BoxLayout(fieldPaneY, BoxLayout.Y_AXIS));
 		this._fieldMap.forEach((k,v)->{
-			JPanel fieldPane = new JPanel();
-			fieldPane.setLayout(new BoxLayout(fieldPane, BoxLayout.X_AXIS));
-			fieldPane.add(k);
-			fieldPane.add(Box.createRigidArea(new Dimension(20,30)));
-			fieldPane.add(v);
-			mainPane.add(fieldPane);
+			JPanel fieldPaneX = new JPanel();
+			fieldPaneX.setLayout(new BoxLayout(fieldPaneX, BoxLayout.X_AXIS));
+			fieldPaneX.add(k);
+			fieldPaneX.add(Box.createRigidArea(new Dimension(40,30)));
+			fieldPaneX.add(v);
+			fieldPaneY.add(fieldPaneX);
 		});
+
+		JButton generateButton = new JButton("Add field");
+		GenerateTextFieldButtonAction generateButtonListener = new GenerateTextFieldButtonAction(fieldPaneY, _fieldMap);
+		generateButton.addActionListener(generateButtonListener);
+
+		mainPane.add(fieldPaneY);
+		mainPane.add(generateButton);
 
 		mainPane.add(Box.createRigidArea(new Dimension(10, 20)));
 		mainPane.add(regButton);
