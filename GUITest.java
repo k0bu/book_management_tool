@@ -101,12 +101,17 @@ public class GUITest {
 		JButton generateButton = new JButton("Add field");
 		GenerateTextFieldButtonAction generateButtonListener = new GenerateTextFieldButtonAction(fieldPaneY, _fieldMap);
 		generateButton.addActionListener(generateButtonListener);
+		generateButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		mainPane.add(fieldPaneY);
-		mainPane.add(generateButton);
-
+		
 		mainPane.add(Box.createRigidArea(new Dimension(10, 20)));
-		mainPane.add(regButton);
+		JPanel genTo = new JPanel();
+		genTo.add(regButton);
+		genTo.add(Box.createRigidArea(new Dimension(40,30)));
+		genTo.add(generateButton);
+		genTo.setLayout(new BoxLayout(genTo, BoxLayout.X_AXIS));
+		mainPane.add(genTo);
 		mainPane.add(Box.createRigidArea(new Dimension(10, 30)));
 
 		JPanel scrollPane = new JPanel();
