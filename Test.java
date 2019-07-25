@@ -1,4 +1,4 @@
-import bookInterface.*;
+import book_manager.bookInterface.*;
 import java.util.List;
 
 public class Test{

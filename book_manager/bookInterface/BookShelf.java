@@ -1,4 +1,4 @@
-package bookInterface;
+package book_manager.bookInterface;
 
 import java.util.*;
 import java.util.stream.Collectors;

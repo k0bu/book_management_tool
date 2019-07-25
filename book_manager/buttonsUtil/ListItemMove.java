@@ -1,4 +1,4 @@
-package buttonsUtil;
+package book_manager.buttonsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 
-import bookInterface.*;
+import book_manager.bookInterface.*;
 
 //https://ateraimemo.com/Swing/FastRemoveOfListItems.html
 public class ListItemMove {

@@ -1,9 +1,8 @@
-import buttonsUtil.*;
-import bookInterface.*;
+import book_manager.buttonsUtil.*;
+import book_manager.bookInterface.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -58,6 +57,14 @@ public class GUITest {
 		regButton.addActionListener( regButtonListener );
 		regButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+		JButton interestButton = new JButton("Sort By Interest");
+		var interestButtonAction = new InterestButtonAction(_toReadBookShelf, _toReadList);
+		interestButton.addActionListener(interestButtonAction);
+
+		JButton popularityButton = new JButton("Sort By Popularity");
+		var popularityButtonAction = new PopularityButtonAction(_toReadBookShelf, _toReadList);
+		popularityButton.addActionListener(popularityButtonAction);
+
 	
 		JButton toRead2Finished = new JButton(">");
 		MoveElementButtonAction toRead2FinishedListener = new MoveElementButtonAction(_toReadList, _finishedList, _toReadBookShelf, _finishedBookShelf);
@@ -111,7 +118,14 @@ public class GUITest {
 		genTo.add(Box.createRigidArea(new Dimension(40,30)));
 		genTo.add(generateButton);
 		genTo.setLayout(new BoxLayout(genTo, BoxLayout.X_AXIS));
+		
+		JPanel intPop = new JPanel();
+		intPop.add(interestButton);
+		intPop.add(popularityButton);
+		intPop.setLayout(new BoxLayout(intPop, BoxLayout.X_AXIS));
+
 		mainPane.add(genTo);
+		mainPane.add(intPop);
 		mainPane.add(Box.createRigidArea(new Dimension(10, 30)));
 
 		JPanel scrollPane = new JPanel();

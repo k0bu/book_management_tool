@@ -1,4 +1,4 @@
-package buttonsUtil;
+package book_manager.buttonsUtil;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
-import bookInterface.*;
+import book_manager.bookInterface.*;
 
 public class RegisterBookButtonAction implements ActionListener {
   private Map<JTextField, JTextField> _textFieldMap;

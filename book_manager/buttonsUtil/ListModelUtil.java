@@ -1,4 +1,4 @@
-package buttonsUtil;
+package book_manager.buttonsUtil;
 
 import java.util.ArrayList;
 import java.util.List;

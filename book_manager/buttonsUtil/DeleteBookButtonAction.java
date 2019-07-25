@@ -1,4 +1,4 @@
-package buttonsUtil;
+package book_manager.buttonsUtil;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,7 +6,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-import bookInterface.*;
+import book_manager.bookInterface.*;
 
 import java.util.List;
 import java.util.ArrayList;

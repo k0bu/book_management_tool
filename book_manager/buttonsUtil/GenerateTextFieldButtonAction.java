@@ -1,4 +1,4 @@
-package buttonsUtil;
+package book_manager.buttonsUtil;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
