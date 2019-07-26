@@ -14,7 +14,7 @@ javac -cp .;Recommend.jar InterestButtonAction.java
 javac -cp .;Recommend.jar PopularityButtonAction.java
 
 javac -cp .;Recommend.jar GUITest.java
-java -cp .;Recommend.jar GUITest.java
+java -cp .;Recommend.jar GUITest
 
 
 
