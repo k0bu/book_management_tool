@@ -11,7 +11,27 @@ java -cp .;Recommend.jar Test
 
 ## 使用方法
 
+コンパイルする際、CMD上であれば`run.bat`が使用することができる。他のシステムであればクラスパスの分割要素`;`から`:`に変化すればよい。
 
+```cmd
+echo Starting...
+cd book_manager/bookInterface
+javac -cp ../../;/book_manager/bookInterface *.java
+echo compiled bookInterface
+cd ../buttonsUtil
+javac -cp ../../;/book_manager/buttonsUtil *.java
+echo compiled buttonsUtil
+cd ../../
+javac -cp .;Recommend.jar InterestButtonAction.java
+javac -cp .;Recommend.jar PopularityButtonAction.java
+
+javac -cp .;Recommend.jar GUITest.java
+java -cp .;Recommend.jar GUITest.java
+```
+
+テキストフィールドを増やし、本の情報を増やすことが可能かつそれぞれの本が任意の長さの情報列を持つことが可能。Recommend.jarからのソートはSort By InterestとSort By Popularityによって可能。複数選択し>と<ボタンによって要素の移動が可能、また削除においても複数選択可能。
+
+![GUI](sample_gui.png "GUI")
 
 ## package bookInterface
 
@@ -97,5 +117,20 @@ java -cp .;Recommend.jar Test
 
 上記のスクリプト上では、GUIの構造を記載するクラス上での内部クラスではなくなっているため、それぞれコンストラクタにおいて、それぞれの機能を満たすために必要な変数の参照を受け取るようにしている。
 
+`DeleteBookButtonAction.java`では、コンストラクタを呼ぶ際に与えた引数のリストと本棚から要素を消すことができる。具体的な実装となっているため、名前もより具体的になっている。
+
+`GenerateTextFieldButtonAction.java`では、新しくテキストフィールドを、テキストフィールドを管理する動的リストに加えることができ、またGUI上の更新を行うことができる。
+
+`MoveElementButtonAction.java`では、コンストラクタを呼ぶ際に与えた引数のリストと本棚間の移動の始点と終点を示し、その間の動きの整合性をとることができる。
+
+`QuitButtonAction.java`では、実行を終了することができる。
+
+`RegisterBookButtonAction.java`では、コンストラクタを呼ぶ際に与えた引数のリストと本棚に新しく要素を追加することができる。
+
 これらの実装部分はまだまだ機能分解し、ボタン自身の実装と、データの動きの部分の実装を別にし、現状よりも多くの拡張性を持たせることはできる。
 
+ここで、本来であれば、buttonsUtil内に含まれていたが、`InterestButtonAction.java`と`PopularityButtonAction.java`はコンパイルの都合上、package内に存在する場合、jarファイルを認識しなかったため、package外に出している。
+
+## 感想
+
+今回は最終的にOOPの考えをうまく活用できるような実装にできず、またインターフェースをフルに活用した設計ができず悔いが残る点が多い。正直GoFのデザインパターンやDDDなどの設計方法を学べる授業が学部3年ででてくると非常にありがたい。
